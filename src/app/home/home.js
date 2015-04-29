@@ -95,8 +95,8 @@ function generaHtmlFactory() {
             }
 
             function generaHtmlInteger(pregunta){
-                var inicio = '<input type="number"';
-                var fin = '>';
+                var inicio = '<div><input type="number"';
+                var fin = '></div>';
 
                  //name="montoSolicitado" placeholder="Ingrese Monto..." min="10000" max="5000000" class="ui-input-text" ng-model="formData.montoSolicitado" required>
                 result = inicio + getHtmlPlaceholder(pregunta) + getHtmlMin(pregunta) + getHtmlMax(pregunta) + fin;
@@ -107,7 +107,7 @@ function generaHtmlFactory() {
             function getHtmlMin(pregunta){
                 result = "";
                 if (pregunta.min){
-                    result = ' min="' + pregunta.min+ '" ';
+                    result = ' min="1' + pregunta.min+ '" ';
                 }
                 return result;
             }
@@ -116,6 +116,8 @@ function generaHtmlFactory() {
                 result = "";
                 if (pregunta.max){
                     result = ' max="' + pregunta.max+ '" ';
+                }else {
+                    result = " max=''";
                 }
                 return result;
             }
