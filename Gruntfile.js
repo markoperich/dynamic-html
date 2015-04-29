@@ -120,10 +120,10 @@ module.exports = function ( grunt ) {
                     }
                 ]
             },
-            build_vendor_assets: {
+            build_lib_assets: {
                 files: [
                     {
-                        src: [ '<%= vendor_files.assets %>' ],
+                        src: [ '<%= lib_files.assets %>' ],
                         dest: '<%= build_dir %>/assets/',
                         cwd: '.',
                         expand: true,
@@ -141,20 +141,20 @@ module.exports = function ( grunt ) {
                     }
                 ]
             },
-            build_vendorjs: {
+            build_libjs: {
                 files: [
                     {
-                        src: [ '<%= vendor_files.js %>' ],
+                        src: [ '<%= lib_files.js %>' ],
                         dest: '<%= build_dir %>/',
                         cwd: '.',
                         expand: true
                     }
                 ]
             },
-            build_vendorcss: {
+            build_libcss: {
                 files: [
                     {
-                        src: [ '<%= vendor_files.css %>' ],
+                        src: [ '<%= lib_files.css %>' ],
                         dest: '<%= build_dir %>/',
                         cwd: '.',
                         expand: true
@@ -164,7 +164,7 @@ module.exports = function ( grunt ) {
             build_fonts: {
                 files: [
                     {
-                        src: [ '<%= vendor_files.fonts %>' ],
+                        src: [ '<%= lib_files.fonts %>' ],
                         dest: '<%= build_dir %>/assets/fonts',
                         cwd: '.',
                         expand: true,
@@ -182,7 +182,7 @@ module.exports = function ( grunt ) {
                         expand: true
                     },
                     {
-                        src: [ '<%= vendor_files.css %>' ],
+                        src: [ '<%= lib_files.css %>' ],
                         dest: '<%= compile_dir %>/',
                         cwd: '.',
                         expand: true
@@ -196,26 +196,26 @@ module.exports = function ( grunt ) {
         */
         concat: {
             /**
-            * The `build_css` target concatenates compiled CSS and vendor CSS
+            * The `build_css` target concatenates compiled CSS and lib CSS
             * together.
             */
             build_css: {
                 src: [
-                    '<%= vendor_files.css %>',
+                    '<%= lib_files.css %>',
                     '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
                 ],
                 dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
             },
             /**
             * The `compile_js` target is the concatenation of our application source
-            * code and all specified vendor source code into a single file.
+            * code and all specified lib source code into a single file.
             */
             compile_js: {
                 options: {
                     banner: '<%= meta.banner %>'
                 },
                 src: [
-                    '<%= vendor_files.js %>',
+                    '<%= lib_files.js %>',
                     'module.prefix',
                     '<%= build_dir %>/src/**/*.js',
                     '<%= html2js.app.dest %>',
@@ -345,6 +345,8 @@ module.exports = function ( grunt ) {
                     src: [ '<%= app_files.coffeeunit %>' ]
                 }
             }
+
+
         },
 
         /**
@@ -408,11 +410,11 @@ module.exports = function ( grunt ) {
             build: {
                 dir: '<%= build_dir %>',
                 src: [
-                    '<%= vendor_files.js %>',
+                    '<%= lib_files.js %>',
                     '<%= build_dir %>/src/**/*.js',
                     '<%= html2js.common.dest %>',
                     '<%= html2js.app.dest %>',
-                    '<%= vendor_files.css %>',
+                    '<%= lib_files.css %>',
                     '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
                 ]
             },
@@ -426,7 +428,7 @@ module.exports = function ( grunt ) {
                 dir: '<%= compile_dir %>',
                 src: [
                     '<%= concat.compile_js.dest %>',
-                    '<%= vendor_files.css %>',
+                    '<%= lib_files.css %>',
                     '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
                 ]
             }
@@ -440,7 +442,7 @@ module.exports = function ( grunt ) {
             unit: {
                 dir: '<%= build_dir %>',
                 src: [
-                    '<%= vendor_files.js %>',
+                    '<%= lib_files.js %>',
                     '<%= html2js.app.dest %>',
                     '<%= html2js.common.dest %>',
                     '<%= test_files.js %>'
@@ -511,7 +513,7 @@ module.exports = function ( grunt ) {
                 files: [
                     'src/assets/**/*'
                 ],
-                tasks: [ 'copy:build_app_assets', 'copy:build_vendor_assets' ]
+                tasks: [ 'copy:build_app_assets', 'copy:build_lib_assets' ]
             },
 
             /**
@@ -594,8 +596,8 @@ module.exports = function ( grunt ) {
     */
     grunt.registerTask( 'build', [
         'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
-        'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-        'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'copy:build_fonts',
+        'concat:build_css', 'copy:build_app_assets', 'copy:build_lib_assets',
+        'copy:build_appjs', 'copy:build_libjs', 'copy:build_libcss', 'copy:build_fonts',
         'index:build', 'karmaconfig', 'karma:continuous'
     ]);
 
