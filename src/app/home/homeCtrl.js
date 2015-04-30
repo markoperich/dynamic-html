@@ -1,7 +1,5 @@
 
-angular.module( 'ngBoilerplate.home', [
-    'ui.router'
-])
+angular.module( 'ngBoilerplate.home')
 
 .config(config)
 .controller( 'HomeCtrl', HomeController)
