@@ -28,11 +28,11 @@ function HomeController( $scope, generaHtmlFactory ) {
             "tipo" : "boolean",
             "respuestas" : {
                 "resp_true" : {
-                    "texto" : "Si",
+                    "observacion_requerida" : "Si",
                     "siguiente" : "2"
                 },
                 "resp_no" : {
-                    "texto" : "No",
+                    "observacion_requerida" : "No",
                     "siguiente" : undefined
                 }
             },
@@ -105,7 +105,7 @@ function generaHtmlFactory() {
             function getHtmlMin(pregunta){
                 result = "";
                 if (pregunta.min){
-                    result = ' min="1' + pregunta.min+ '" ';
+                    result = ' min="' + pregunta.min+ '" ';
                 }
                 return result;
             }

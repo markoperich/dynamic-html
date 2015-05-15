@@ -1,5 +1,9 @@
-# [ngBoilerplate](http://joshdmiller.github.com/ng-boilerplate) [![Build Status](https://api.travis-ci.org/ngbp/ngbp.png?branch=v0.3.2-release)](https://travis-ci.org/ngbp/ngbp)
+Implementación de directiva de generación de HTML dinámico
 
-An opinionated kickstarter for [AngularJS](http://angularjs.org) projects.
+    <div ng-repeat="item in items">
+        <div dynamic="item"></div>
+    </div>
 
-***
+Invoca $scope.html(item) y reemplaza el contenido del html.
+
+El html generado es generado y compilado por angular, lo que permite usar bindings del tipo {{elemento}}.
